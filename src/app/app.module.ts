@@ -1,18 +1,75 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatAutocompleteModule,
+  MatSelectModule,
+  MatOptionModule,
+  MatCardModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatListModule,
+  MatIconModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatDatepickerModule,
+  MatNativeDateModule
+} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
+import {CustomerService} from './customer.service';
+import {CustomersComponent} from './customers/customers.component';
+import {CustomerComponent} from './customer/customer.component';
 
 
-import { AppComponent } from './app.component';
+const appRoutes: Routes = [
+  {path: 'customers', component: CustomersComponent},
+  {path: 'customer', component: CustomerComponent},
+  {path: '**', redirectTo: '/customer', pathMatch: 'full'}
+];
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CustomersComponent,
+    CustomerComponent
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(appRoutes, {enableTracing: false}),
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCardModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatListModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
