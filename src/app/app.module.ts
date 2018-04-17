@@ -28,6 +28,7 @@ import {AppComponent} from './app.component';
 import {CustomerService} from './customer.service';
 import {CustomersComponent} from './customers/customers.component';
 import {CustomerComponent} from './customer/customer.component';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 
 const appRoutes: Routes = [
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [CustomerService],
+  providers: [CustomerService, MediaMatcher],
   bootstrap: [AppComponent]
 })
 export class AppModule {

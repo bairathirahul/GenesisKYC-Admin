@@ -79,15 +79,15 @@ export class CustomerService {
     const params = {...this.obcParams};
     params.method = 'updateCustomerStatus';
     params.args = [customer.id.toString(), status, comment];
-    params.url = environment.queryURL;
+    params.url = environment.updateURL;
     return this.http.post(environment.serviceURL + 'proxy', params, this.httpOptions)
-      .subscribe(function (response: any) {
+      .pipe(map(function (response: any) {
           if (response.returnCode === 'Success') {
             customer.status = status;
           }
           return response;
         }
-      );
+      ));
   }
 
   getCustomers() {

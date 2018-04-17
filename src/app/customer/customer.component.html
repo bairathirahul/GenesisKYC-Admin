@@ -25,11 +25,33 @@
 
     <mat-card>
       <mat-card-title>
+        Contact Information
+      </mat-card-title>
+      <mat-card-content>
+        <h4>Home Phone Number</h4>
+        <p>{{ customer.contact.homeNumber }}</p>
+
+        <h4>Mobile Phone Number</h4>
+        <p>{{ customer.contact.mobileNumber }}</p>
+
+        <h4>Work Phone Number</h4>
+        <p>{{ customer.contact.workNumber }}</p>
+
+        <h4>Email Address</h4>
+        <p>{{ customer.contact.emailAddress }}</p>
+
+        <h4>Primary Contact</h4>
+        <p>{{ customer.contact.primaryContact }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>
         Addresses
       </mat-card-title>
       <mat-card-content>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let address of customer.addresses; let i = index" [expanded]="true">
+          <mat-expansion-panel *ngFor="let address of customer.addresses; let i = index" [expanded]="false">
             <mat-expansion-panel-header>
               <mat-panel-title>Address {{ i + 1 }}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -63,7 +85,7 @@
       </mat-card-title>
       <mat-card-content>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let bankAccount of customer.bankAccounts; let i = index" [expanded]="true">
+          <mat-expansion-panel *ngFor="let bankAccount of customer.bankAccounts; let i = index" [expanded]="false">
             <mat-expansion-panel-header>
               <mat-panel-title>Bank Account {{ i + 1 }}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -87,33 +109,11 @@
 
     <mat-card>
       <mat-card-title>
-        Contact Information
-      </mat-card-title>
-      <mat-card-content>
-        <h4>Home Phone Number</h4>
-        <p>{{ customer.contact.homeNumber }}</p>
-
-        <h4>Mobile Phone Number</h4>
-        <p>{{ customer.contact.mobileNumber }}</p>
-
-        <h4>Work Phone Number</h4>
-        <p>{{ customer.contact.workNumber }}</p>
-
-        <h4>Email Address</h4>
-        <p>{{ customer.contact.emailAddress }}</p>
-
-        <h4>Primary Contact</h4>
-        <p>{{ customer.contact.primaryContact }}</p>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-      <mat-card-title>
         Employments
       </mat-card-title>
       <mat-card-content>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let employment of customer.employments; let i = index" [expanded]="true">
+          <mat-expansion-panel *ngFor="let employment of customer.employments; let i = index" [expanded]="false">
             <mat-expansion-panel-header>
               <mat-panel-title>Employment {{ i + 1 }}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -160,14 +160,44 @@
   </div>
 
   <div class="col">
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let document of customer.documents; let i = index" [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-description>{{ document.documentDesc }}</mat-panel-description>
-        </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Documents</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let document of customer.documents; let i = index" [expanded]="false">
+            <mat-expansion-panel-header>
+              <mat-panel-description>{{ document.documentDesc }}</mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <iframe [src]="getDocumentUrl(document)"></iframe>
-      </mat-expansion-panel>
-    </mat-accordion>
+            <iframe [src]="getDocumentUrl(document)"></iframe>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Action</mat-card-title>
+        <mat-card-subtitle *ngIf="this.message">{{ this.message }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form (submit)="onSubmit()">
+          <mat-form-field>
+            <mat-select name="status" [(ngModel)]="action.status" placeholder="Status" [disabled]="requesting">
+              <mat-option value="approve">Approve</mat-option>
+              <mat-option value="reject">Reject</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea name="comment" [(ngModel)]="action.comment" matInput placeholder="Comment"
+                      [disabled]="requesting"></textarea>
+          </mat-form-field>
+          <button type="submit" mat-raised-button [disabled]="requesting">Submit</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
