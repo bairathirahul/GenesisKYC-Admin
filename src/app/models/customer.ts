@@ -4,7 +4,7 @@ import {Contact} from './contact';
 import {Employment} from './employment';
 import {Document} from './document';
 import {BankAccount} from './bank-account';
-import {Comment} from './comment';
+import {BankTransaction} from './bank-transaction';
 
 export class Customer {
   id: number;
@@ -14,5 +14,7 @@ export class Customer {
   employments: Array<Employment>;
   documents: Array<Document>;
   bankAccounts: Array<BankAccount>;
-  comments: Array<Comment>;
+  bankTransactions: Array<BankTransaction>;
+  accesses = {};
+  status: string;
 }

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+.col {
+  width: 50%;
+  padding: 0 8px;
+}
+
+iframe {
+  width: 100%;
+  border: none;
+  height: 75vh;
+}
+
+mat-card {
+  margin-bottom: 16px;
+}
